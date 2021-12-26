@@ -2149,6 +2149,8 @@ class WebSocket:
         # Subscribe to the requested topics.
         if not self.spot_auth and self.spot_unauth:
             for subscription in self.subscriptions:
+                if isinstance(subscription, str):
+                    subscription = json.loads(subscription)
                 if not subscription.get('event'):
                     subscription['event'] = 'sub'
                 if not subscription.get('params'):
