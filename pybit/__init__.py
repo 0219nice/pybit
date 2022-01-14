@@ -2177,7 +2177,8 @@ class WebSocket:
                 index = self.subscriptions.index(subscription)
                 subscription = subscription if isinstance(subscription, dict) \
                     else json.loads(subscription)
-                subscription.pop('event')
+                if 'event' in subscription:
+                    subscription.pop('event')
                 subscription['params']['binary'] = str(subscription['params'][
                     'binary']).lower()
                 if subscription['params'].get('dumpScale'):
